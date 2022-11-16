@@ -47,8 +47,11 @@ def getCountWord(list_lines, size_word):
 
 def main():
     lines = readAllFile("Harry_Potter.txt")
-    print(getCountAlphaChar(lines))
-    print(getCountWord(lines, 3))
+    try:
+        file = open("laba5.txt", "w", encoding="utf-8")
+        file.write(f"{getCountAlphaChar(lines)}\n{getCountWord(lines, 10)}")
+    except FileNotFoundError:
+        print("File? laba5.txt")
 
 
 if __name__ == "__main__":
