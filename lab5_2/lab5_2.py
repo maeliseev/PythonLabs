@@ -25,8 +25,8 @@ def generateLines(line, x, y):
 def main():
     try:
         file = open("instants_to_lock.txt", "r", encoding="utf-8")
-        line = file.readline()
-        generateLines(line, 18, 96)
+        generateLines(file.readline(), 18, 96)
+        file.close()
     except FileNotFoundError:
         print("файл с форматом не найден.")
 

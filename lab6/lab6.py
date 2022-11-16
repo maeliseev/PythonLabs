@@ -40,7 +40,9 @@ def main():
             array_users.append(User(args[0], args[1].replace("\n", "").split(", ")))
         file.close()
 
-        print(getPopularLink(array_users))
+        file = open("result.txt", "w", encoding="utf-8")
+        file.write(getPopularLink(array_users))
+        file.close()
     except FileNotFoundError:
         print("Один из файлов не найден")
 

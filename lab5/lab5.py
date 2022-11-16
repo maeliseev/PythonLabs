@@ -50,6 +50,7 @@ def main():
     try:
         file = open("laba5.txt", "w", encoding="utf-8")
         file.write(f"{getCountAlphaChar(lines)}\n{getCountWord(lines, 10)}")
+        file.close()
     except FileNotFoundError:
         print("File? laba5.txt")
 
