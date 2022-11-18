@@ -10,16 +10,12 @@
 
 
 def generateLines(line, x, y):
-    try:
-        file = open("example_xdc.txt", "w", encoding="utf-8")
-        index = 0
-        for i in range(x):
-            for j in range(y):
-                file.write(line.replace("X*", f"X{i}").replace("Y*", f"Y{j}").replace("[*]", f"[{index}]"))
-                index += 1
-
-    except FileNotFoundError:
-        print("Файл не найден")
+    file = open("example_xdc.txt", "w", encoding="utf-8")
+    index = 0
+    for i in range(x):
+        for j in range(y):
+            file.write(line.replace("X*", f"X{i}").replace("Y*", f"Y{j}").replace("[*]", f"[{index}]"))
+            index += 1
 
 
 def main():
