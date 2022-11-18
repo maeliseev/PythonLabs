@@ -45,6 +45,7 @@ def getCountWord(list_lines, size_word):
     return word_dictionaries
 
 
+# будите молодцы, если файла нет, вы его создадите, но мне лень
 def main():
     lines = readAllFile("Harry_Potter.txt")
     try:

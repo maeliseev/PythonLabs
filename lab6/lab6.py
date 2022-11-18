@@ -11,26 +11,7 @@ class User:
         self.links = links
 
 
-def getPopularLink(users):
-    link_count = {}
-    for user in users:
-        for link in user.links:
-            if link_count.get(link) is None:
-                link_count[link] = 1
-            else:
-                link_count[link] += 1
-
-    popular_link = ""
-    popular_link_count = 0
-    for link in link_count.keys():
-        if link_count[link] > popular_link_count:
-            popular_link = link
-            popular_link_count = link_count[link]
-
-    return f"most popular - {popular_link}."
-
-
-def main():
+def __generate_users__():
     array_users = []
     try:
         file = open("db.txt", "r", encoding="utf-8")
@@ -39,12 +20,55 @@ def main():
             args = line.split(" | ")
             array_users.append(User(args[0], args[1].replace("\n", "").split(", ")))
         file.close()
-
-        file = open("result.txt", "w", encoding="utf-8")
-        file.write(getPopularLink(array_users))
-        file.close()
     except FileNotFoundError:
-        print("Один из файлов не найден")
+        print("Файл не найден.")
+
+    return array_users
+
+
+class UserBrain:
+    def __init__(self):
+        self.__users = []
+        try:
+            file = open("db.txt", "r", encoding="utf-8")
+
+            for line in file.readlines():
+                args = line.split(" | ")
+                self.__users.append(User(args[0], args[1].replace("\n", "").split(", ")))
+            file.close()
+        except FileNotFoundError:
+            print("Файл c данными не найден.")
+
+    def get_popular_link(self):
+        link_count = {}
+        for user in self.__users:
+            for link in user.links:
+                if link_count.get(link) is None:
+                    link_count[link] = 1
+                else:
+                    link_count[link] += 1
+
+        popular_link = ""
+        popular_link_count = 0
+        for link in link_count.keys():
+            if link_count[link] > popular_link_count:
+                popular_link = link
+                popular_link_count = link_count[link]
+
+        return f"most popular - {popular_link}."
+
+
+def write_in_file(arg):
+
+    file = open("result.txt", "w", encoding="utf-8")
+    file.write(arg)
+    file.close()
+
+
+def main():
+    brain = UserBrain()
+    print(brain.get_popular_link())
+    write_in_file(brain.get_popular_link())
 
 
 if __name__ == "__main__":
