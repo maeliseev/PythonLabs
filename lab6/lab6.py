@@ -59,7 +59,6 @@ class UserBrain:
 
 
 def write_in_file(arg):
-
     file = open("result.txt", "w", encoding="utf-8")
     file.write(arg)
     file.close()
