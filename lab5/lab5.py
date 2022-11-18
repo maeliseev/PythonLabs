@@ -20,7 +20,7 @@ def getCountAlphaChar(list_lines):
     char_dictionaries = {}
     for line in list_lines:
         for char in line:
-            if char.isalpha():
+            if not char.isalpha():
                 break
 
             if char_dictionaries.get(char) is None:
@@ -49,7 +49,7 @@ def main():
     lines = readAllFile("Harry_Potter.txt")
     try:
         file = open("laba5.txt", "w", encoding="utf-8")
-        file.write(f"{getCountAlphaChar(lines)}\n{getCountWord(lines, 10)}")
+        file.write(f"{getCountAlphaChar(lines)}\n{getCountWord(lines, 3)}")
         file.close()
     except FileNotFoundError:
         print("File? laba5.txt")
