@@ -12,10 +12,18 @@
 def generateLines(line, x, y):
     file = open("example_xdc.txt", "w", encoding="utf-8")
     index = 0
+
+    def write_plus_index(arg1, arg2):
+        nonlocal index
+        file.write(line.replace("X*", f"X{arg1}").replace("Y*", f"Y{arg2}").replace("[*]", f"[{index}]"))
+        index += 1
+
     for i in range(x):
         for j in range(y):
-            file.write(line.replace("X*", f"X{i}").replace("Y*", f"Y{j}").replace("[*]", f"[{index}]"))
-            index += 1
+            if i % 2 == 0:
+                write_plus_index(i, j)
+            else:
+                write_plus_index(i, y - j)
 
 
 def main():
