@@ -11,21 +11,6 @@ class User:
         self.links = links
 
 
-def __generate_users__():
-    array_users = []
-    try:
-        file = open("db.txt", "r", encoding="utf-8")
-
-        for line in file.readlines():
-            args = line.split(" | ")
-            array_users.append(User(args[0], args[1].replace("\n", "").split(", ")))
-        file.close()
-    except FileNotFoundError:
-        print("Файл не найден.")
-
-    return array_users
-
-
 class UserBrain:
     def __init__(self):
         self.__users = []
