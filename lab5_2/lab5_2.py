@@ -23,7 +23,7 @@ def generateLines(line, x, y):
             if i % 2 == 0:
                 write_plus_index(i, j)
             else:
-                write_plus_index(i, y - j)
+                write_plus_index(i, y - j - 1)
 
 
 def main():
