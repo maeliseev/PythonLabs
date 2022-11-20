@@ -17,9 +17,12 @@ class UserBrain:
         try:
             file = open("db.txt", "r", encoding="utf-8")
 
-            for line in file.readlines():
-                args = line.split(" | ")
-                self.__users.append(User(args[0], args[1].replace("\n", "").split(", ")))
+            lines = file.readlines()
+
+            for i in range(len(lines)):
+                args = lines[i].split(" | ")
+                self.__users[i] = User(args[0], args[1].replace("\n", "").split(", "))
+
             file.close()
         except FileNotFoundError:
             print("Файл c данными не найден.")
