@@ -6,7 +6,7 @@
 import re
 
 
-def readAllFile(path):
+def read_all_file(path):
     try:
         file = open(path, "r", encoding="utf-8")
         lines = file.readlines()
@@ -16,7 +16,7 @@ def readAllFile(path):
         return []
 
 
-def getCountAlphaChar(list_lines):
+def get_count_alpha_char(list_lines):
     char_dictionaries = {}
     for line in list_lines:
         for char in line:
@@ -31,7 +31,7 @@ def getCountAlphaChar(list_lines):
     return char_dictionaries
 
 
-def getCountWord(list_lines, size_word):
+def get_count_word(list_lines, size_word):
     word_dictionaries = {}
     for line in list_lines:
         for word in re.sub('[,.!?’”]', '', line).split(" "):
@@ -47,10 +47,10 @@ def getCountWord(list_lines, size_word):
 
 # будите молодцы, если файла нет, вы его создадите, но мне лень
 def main():
-    lines = readAllFile("Harry_Potter.txt")
+    lines = read_all_file("Harry_Potter.txt")
 
     file = open("laba5.txt", "w", encoding="utf-8")
-    file.write(f"{getCountAlphaChar(lines)}\n{getCountWord(lines, 3)}")
+    file.write(f"{get_count_alpha_char(lines)}\n{get_count_word(lines, 3)}")
     file.close()
 
 

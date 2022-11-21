@@ -19,9 +19,9 @@ class UserBrain:
 
             lines = file.readlines()
 
-            for i in range(len(lines)):
-                args = lines[i].split(" | ")
-                self.__users[i] = User(args[0], args[1].replace("\n", "").split(", "))
+            for line in lines:
+                args = line.split(" | ")
+                self.__users.append(User(args[0], args[1].replace("\n", "").split(", ")))
 
             file.close()
         except FileNotFoundError:

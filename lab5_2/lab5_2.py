@@ -9,7 +9,7 @@
 """
 
 
-def generateLines(line, x, y):
+def generate_lines(line, x, y):
     file = open("example_xdc.txt", "w", encoding="utf-8")
     index = 0
 
@@ -29,7 +29,7 @@ def generateLines(line, x, y):
 def main():
     try:
         file = open("instants_to_lock.txt", "r", encoding="utf-8")
-        generateLines(file.readline(), 18, 96)
+        generate_lines(file.readline(), 18, 96)
         file.close()
     except FileNotFoundError:
         print("файл с форматом не найден.")
