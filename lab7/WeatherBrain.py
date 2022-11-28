@@ -11,9 +11,6 @@ def append_file(arg):
 
 
 class WeatherBrain:
-    def __init__(self):
-        pass
-
     @staticmethod
     def show_all_graph():
         plt.show()

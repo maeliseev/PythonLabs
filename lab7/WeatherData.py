@@ -1,5 +1,5 @@
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 def append_file(arg):
     file = open("result.txt", "a", encoding="utf-8")
@@ -24,7 +24,8 @@ class WeatherData:
 
     def __get_statistic(self, line):
         stat_array = line.split()
-        return [stat_array[1], stat_array[2], stat_array[3], stat_array[5], stat_array[9], stat_array[7], stat_array[8], stat_array[11]]
+        return [stat_array[1], stat_array[2], stat_array[3], stat_array[5], stat_array[9], stat_array[7], stat_array[8],
+                stat_array[11]]
         # 0 - year, 1 - month, 2 - day, 3 - min temp, 4 - max temp, 5 - mean temp, 6 - status mean temp, 7 - осадки
 
     def __generate_array(self):
@@ -59,11 +60,68 @@ class WeatherData:
         years = get_years()
         return years, [self.__get_mean_temperature(year, month) for year in years]
 
+    def get_center(self, year=2003, month=None):
+        if month is None:
+            month = []
+        temp = []
+
+        for i in self.__arr:
+            if int(i[0]) == year and int(i[1]) in month:
+                temp.append(i[7])
+
+        np_temp = np.array(temp)
+        center = np.sum(np_temp) / np.size(np_temp)
+
+        return center
+
+    def get_dispersion(self, year=2003, month=None):
+        if month is None:
+            month = []
+        temp = []
+
+        for i in self.__arr:
+            if int(i[0]) == year and int(i[1]) in month:
+                temp.append(i[7])
+
+        np_temp = np.array(temp)
+        center = np.sum(np_temp) / np.size(np_temp)
+
+        deviation = np_temp - np.array([center for _ in range(np.size(np_temp))])
+
+        dispersion = np.sum(deviation ** 2) / np.size(np_temp)
+
+        return dispersion
+
+    def __histogram(self, year):
+        month = [i for i in range(1, 12)]
+        temp = []
+        for k in month:
+            temp.append(self.get_center(year, [k]))
+
+        plt.subplots()
+        plt.bar(month, temp)
+        plt.suptitle(f"{self.__file_path} __histogram")
+
+    def __histogram_dispersion(self, year):
+        month = [i for i in range(1, 12)]
+        temp = []
+        for k in month:
+            temp.append(self.get_dispersion(year, [k]))
+
+        plt.subplots()
+        plt.bar(month, temp)
+        plt.suptitle(f"{self.__file_path} __histogram_dispersion")
+
     def exec(self, year):
         self.__update_lines_from_file()
         self.__generate_array()
 
         append_file(f"Средняя температура в {year} году за лето в {self.__file_path} = "
-                      f"{self.__get_mean_temperature(year, [6, 5, 4])}\n")
+                    f"{self.__get_mean_temperature(year, [6, 5, 4])}\n")
         append_file(f"Средняя температура в {year} году за зиму в {self.__file_path} = "
-                      f"{self.__get_mean_temperature(year, [12, 1, 2])}\n")
+                    f"{self.__get_mean_temperature(year, [12, 1, 2])}\n")
+
+        append_file(f"dispersion = {self.get_dispersion(2003, [i for i in range(1, 13)])}")
+
+        self.__histogram_dispersion(2003)
+        self.__histogram(2003)
