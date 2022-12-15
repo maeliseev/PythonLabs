@@ -7,8 +7,6 @@ from WeatherBrain import WeatherBrain
 Краснодар
 
 Функции для работы с атрибутами
-
-ЭТО НЕ РАБОТАЕТ ДО КОНЦА
 """
 
 

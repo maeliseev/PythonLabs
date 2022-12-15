@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def append_file(arg):
     file = open("result.txt", "a", encoding="utf-8")
     file.write(str(arg))
